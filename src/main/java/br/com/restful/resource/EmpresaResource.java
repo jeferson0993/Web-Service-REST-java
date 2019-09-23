@@ -20,13 +20,13 @@ public class EmpresaResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/empresas/{id}")
+	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
 		Empresa empresa = new EmpresaController().buscarPorId(id);
 		if (empresa != null) {
 			return Response.ok().type(MediaType.APPLICATION_JSON).entity(empresa).build();
 		} else {
-			return Response.status(404).entity("empresa nao encontrado").build();
+			return Response.status(404).entity("empresa nao encontrada").build();
 		}
 	}
 
@@ -38,7 +38,7 @@ public class EmpresaResource {
 		if (isempresaGravado == true) {
 			return Response.ok().entity(empresa).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao gravar empresa").build();
+			return Response.status(500).entity("Erro no servidor ao gravar a empresa").build();
 		}
 
 	}
@@ -52,7 +52,7 @@ public class EmpresaResource {
 		if (isempresaAtualizado == true) {
 			return Response.ok().entity(empresa).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao atualizar empresa").build();
+			return Response.status(500).entity("Erro no servidor ao atualizar a empresa").build();
 		}
 
 	}
@@ -64,10 +64,10 @@ public class EmpresaResource {
 
 		boolean isempresaDeletado = new EmpresaController().deletarEmpresa(empresa);
 		if (isempresaDeletado == true) {
-			System.out.println("empresa " + empresa.getRazaoSocial() + " deletado");
+			System.out.println("empresa " + empresa.getRazaoSocial() + " deletada");
 			return Response.ok().entity(empresa).build();
 		} else {
-			System.out.println("Erro no servidor  ao deletar empresa: " + empresa.getRazaoSocial());
+			System.out.println("Erro no servidor ao deletar a empresa: " + empresa.getRazaoSocial());
 			return Response.status(500).entity("Erro no servidor  ao deletar empresa: " + empresa.getRazaoSocial()).build();
 		}
 

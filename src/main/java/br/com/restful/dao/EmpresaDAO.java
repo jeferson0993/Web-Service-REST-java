@@ -60,7 +60,7 @@ public class EmpresaDAO extends ConnectionFactory {
 		Connection conexao = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Empresa empresa = null;
+		Empresa empresa = new Empresa();
 		conexao = criarConexao();
 
 		try {
@@ -71,8 +71,7 @@ public class EmpresaDAO extends ConnectionFactory {
 				empresa.setId(rs.getInt("id"));
 				empresa.setRazaoSocial(rs.getString("nome"));
 				empresa.setCnpj(rs.getString("cnpj"));
-				empresa.setEndereco(rs.getString("endereco"));
-				empresa = new Empresa();
+				empresa.setEndereco(rs.getString("endereco"));				
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar Empresa com ID=" + id + "\n" + e);

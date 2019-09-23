@@ -20,13 +20,14 @@ public class vagaResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/vagas/{id}")
+	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
+            System.out.println("/vagas/" + id);
 		Vaga vaga = new VagaController().buscarPorId(id);
 		if (vaga != null) {
 			return Response.ok().type(MediaType.APPLICATION_JSON).entity(vaga).build();
 		} else {
-			return Response.status(404).entity("vaga nao encontrado").build();
+			return Response.status(404).entity("vaga nao encontrada").build();
 		}
 	}
 
@@ -38,7 +39,7 @@ public class vagaResource {
 		if (isvagaGravado == true) {
 			return Response.ok().entity(vaga).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao gravar vaga").build();
+			return Response.status(500).entity("Erro no servidor ao gravar a vaga").build();
 		}
 
 	}
@@ -52,7 +53,7 @@ public class vagaResource {
 		if (isvagaAtualizado == true) {
 			return Response.ok().entity(vaga).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao atualizar vaga").build();
+			return Response.status(500).entity("Erro no servidor ao atualizar a vaga").build();
 		}
 
 	}
@@ -64,11 +65,11 @@ public class vagaResource {
 
 		boolean isvagaDeletado = new VagaController().deletarvaga(vaga);
 		if (isvagaDeletado == true) {
-			System.out.println("vaga " + vaga.getNome() + " deletado");
+			System.out.println("vaga " + vaga.getNome() + " deletada");
 			return Response.ok().entity(vaga).build();
 		} else {
-			System.out.println("Erro no servidor  ao deletar vaga: " + vaga.getNome());
-			return Response.status(500).entity("Erro no servidor  ao deletar vaga: " + vaga.getNome()).build();
+			System.out.println("Erro no servidor ao deletar a vaga: " + vaga.getNome());
+			return Response.status(500).entity("Erro no servidor ao deletar a vaga: " + vaga.getNome()).build();
 		}
 
 	}

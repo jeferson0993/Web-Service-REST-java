@@ -18,8 +18,8 @@ public class ConnectionFactory {
 
 		HOST_MYSQL = "localhost";
 		PORTA_MYSQL = "3306";
-		USUARIO_MYSQL = "";
-		SENHA_MYSQL = "";
+		USUARIO_MYSQL = "angularjs";
+		SENHA_MYSQL = "angularjs";
 		
 		URL_MYSQL = "jdbc:mysql://" + HOST_MYSQL + ":" + PORTA_MYSQL + "/angularjs";
 		DRIVER = "com.mysql.jdbc.Driver";

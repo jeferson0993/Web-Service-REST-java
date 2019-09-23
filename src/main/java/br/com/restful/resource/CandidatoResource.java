@@ -28,7 +28,7 @@ public class CandidatoResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/candidatos/{id}")
+	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
 		Candidato candidato = new CandidatoController().buscarPorId(id);
 		if (candidato != null) {
@@ -46,7 +46,7 @@ public class CandidatoResource {
 		if (isCandidatoGravado == true) {
 			return Response.ok().entity(candidato).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao gravar candidato").build();
+			return Response.status(500).entity("Erro no servidor ao gravar o candidato").build();
 		}
 
 	}
@@ -60,7 +60,7 @@ public class CandidatoResource {
 		if (isCandidatoAtualizado == true) {
 			return Response.ok().entity(candidato).build();
 		} else {
-			return Response.status(500).entity("Erro no servidor  ao atualizar candidato").build();
+			return Response.status(500).entity("Erro no servidor ao atualizar o candidato").build();
 		}
 
 	}
@@ -76,7 +76,7 @@ public class CandidatoResource {
 			return Response.ok().entity(candidato).build();
 		} else {
 			System.out.println("Erro no servidor  ao deletar candidato: " + candidato.getNome());
-			return Response.status(500).entity("Erro no servidor  ao deletar candidato: " + candidato.getNome()).build();
+			return Response.status(500).entity("Erro no servidor ao deletar o candidato: " + candidato.getNome()).build();
 		}
 
 	}

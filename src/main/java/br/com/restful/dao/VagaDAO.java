@@ -29,7 +29,7 @@ public class VagaDAO extends ConnectionFactory {
 		vagas = new ArrayList<Vaga>();
 		
 		try {
-			pstmt = conexao.prepareStatement("SELECT * FROM vaga ORDER BY nome");
+			pstmt = conexao.prepareStatement("SELECT * FROM vaga");
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -58,7 +58,7 @@ public class VagaDAO extends ConnectionFactory {
 		Connection conexao = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		Vaga vaga = null;
+		Vaga vaga = new Vaga();
 		conexao = criarConexao();
 
 		try {
@@ -68,8 +68,8 @@ public class VagaDAO extends ConnectionFactory {
 			while (rs.next()) {
 				vaga.setId(rs.getInt("id"));
 				vaga.setNome(rs.getString("nome"));
-				vaga = new Vaga();
 			}
+                        System.out.println("VagaDao.getById: " + vaga.toString());
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar vaga com ID=" + id + "\n" + e);
 			e.printStackTrace();

@@ -8,7 +8,7 @@ public final class Candidato {
 	private Integer id;
 	private String nome;
 	private String cpf;
-	private String endereco;
+	private String dataNascimento;
 
 	public Integer getId() {
 		return id;
@@ -34,17 +34,17 @@ public final class Candidato {
 		this.cpf = cpf;
 	}
 
-	public String getEndereco() {
-		return endereco;
+	public String getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
+	public void setDataNascimento(String dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@Override
 	public String toString() {
-		return "Empresa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + "]";
+		return "Empresa [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", data-nascimento=" + dataNascimento + "]";
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public final class Candidato {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
@@ -72,10 +72,10 @@ public final class Candidato {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (endereco == null) {
-			if (other.endereco != null)
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
 				return false;
-		} else if (!endereco.equals(other.endereco))
+		} else if (!dataNascimento.equals(other.dataNascimento))
 			return false;
 		if (id == null) {
 			if (other.id != null)

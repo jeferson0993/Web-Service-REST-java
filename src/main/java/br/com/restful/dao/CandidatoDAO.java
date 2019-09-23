@@ -15,7 +15,7 @@ public class CandidatoDAO extends ConnectionFactory {
 
 	public static CandidatoDAO getInstance() {
 		if (instance == null)
-			instance = new CandidatoDAO();
+                    instance = new CandidatoDAO();
 		return instance;
 	}
 
@@ -38,7 +38,7 @@ public class CandidatoDAO extends ConnectionFactory {
 				candidato.setId(rs.getInt("id"));
 				candidato.setNome(rs.getString("nome"));
 				candidato.setCpf(rs.getString("cpf"));
-				candidato.setEndereco(rs.getString("endereco"));
+				candidato.setDataNascimento(rs.getString("dataNascimento"));
 
 				candidatos.add(candidato);
 				
@@ -72,7 +72,7 @@ public class CandidatoDAO extends ConnectionFactory {
 				candidato.setId(rs.getInt("id"));
 				candidato.setNome(rs.getString("nome"));
 				candidato.setCpf(rs.getString("cpf"));
-				candidato.setEndereco(rs.getString("endereco"));
+				candidato.setDataNascimento(rs.getString("dataNascimento"));
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar candidato com ID=" + id + "\n" + e);
@@ -88,15 +88,15 @@ public class CandidatoDAO extends ConnectionFactory {
 	public boolean insert(Candidato candidato) {
 		String nome = candidato.getNome();
 		String cpf = candidato.getCpf();
-		String endereco = candidato.getEndereco();
+		String dataNascimento = candidato.getDataNascimento();
 		boolean isGravado = false;
 		PreparedStatement pstmt = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("insert into candidato(nome,cpf,endereco)" + "values(?,?,?)");
+			pstmt = conexao.prepareStatement("insert into candidato(nome,cpf,dataNascimento)" + "values(?,?,?)");
 			pstmt.setString(1, nome);
 			pstmt.setString(2, cpf);
-			pstmt.setString(3, endereco);
+			pstmt.setString(3, dataNascimento);
 			boolean execute = pstmt.execute();
 			isGravado = true;
 			System.out.println("Respota do insert: " + execute);
@@ -114,15 +114,15 @@ public class CandidatoDAO extends ConnectionFactory {
 		long id = candidato.getId();
 		String nome = candidato.getNome();
 		String cpf = candidato.getCpf();
-		String endereco = candidato.getEndereco();
+		String dataNascimento = candidato.getDataNascimento();
 		boolean isAtualizado = false;
 		PreparedStatement pstmt = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("UPDATE candidato SET nome =?,cpf = ?,endereco = ? WHERE id = ?");
+			pstmt = conexao.prepareStatement("UPDATE candidato SET nome =?,cpf = ?,dataNascimento = ? WHERE id = ?");
 			pstmt.setString(1, nome);
 			pstmt.setString(2, cpf);
-			pstmt.setString(3, endereco);
+			pstmt.setString(3, dataNascimento);
 			pstmt.setLong(4, id);
 			int execute = pstmt.executeUpdate();
 			isAtualizado = true;

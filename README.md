@@ -15,42 +15,54 @@
 
 # setup do projeto
 ## banco de dados
-#### 1 - entrar no console do MySQL.
-> mysql -u 'angularjs' -D 'angularjs' -p 'angularjs'
 ```shell
+sudo mysql -e "CREATE USER 'angularjs'@'localhost' IDENTIFIED BY 'angularjs'; \
+GRANT ALL PRIVILEGES ON *.angularjs TO 'angularjs'@'localhost'; \
+FLUSH PRIVILEGES; \
+select Host,User,authentication_string from mysql.user;"
 ```
-#### 2 - criar database com o nome ```angularjs```
+
+#### - MySQL.
+```shell
+mysql -u angularjs -p
+```
+
+#### - criar database com o nome ```angularjs```
 ```sql
 #mysql>
 CREATE DATABASE angularjs;
 ```
-### 3 - criar tabela candidato, com id, nome, endereço e cpf.
+### - criar tabela candidato, empresa e vaga.
 ```sql
 #mysql>
 use angularjs;
-CREATE TABLE `candidato` (`nome` varchar(255) NOT NULL, `cpf` varchar(14) NOT NULL, `endereco` varchar(255) NOT NULL,`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf-8;
+CREATE TABLE `candidato` (`nome` varchar(255) NOT NULL, `cpf` varchar(14) NOT NULL, `dataNascimento` varchar(255) NOT NULL,`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 ALTER TABLE `candidato` ADD PRIMARY KEY (`id`);
-ALTER TABLE `candidato` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT
+ALTER TABLE `candidato` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+
+CREATE TABLE `empresa` (`razaoSocial` varchar(255) NOT NULL, `cnpj` varchar(21) NOT NULL, `endereco` varchar(255) NOT NULL,`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `empresa` ADD PRIMARY KEY (`id`);
+ALTER TABLE `empresa` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
+
+CREATE TABLE `vaga` (`nome` varchar(255) NOT NULL,`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `vaga` ADD PRIMARY KEY (`id`);
+ALTER TABLE `vaga` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT;
 ```
 
-
-criar as 3 tabelas candidato, vaga e empresa.
-
 ***
----
 
 # CRUD - methods -  uris
 
-POST - http://localhost:8080/rest-api/vagas
+POST - http://localhost:8080/rest-api/candidatos
 ```json
 #headers 
 { "Content-type": "application/json" } }
 
 #body
 {
-"nome":"",
-"endereco":"",
-"cpf":""
+"nome":"joao da silva",
+"dataNascimento":"21-01-1949",
+"cpf":"9876543"
 }
 ```
 >#### atualizar 
@@ -70,19 +82,30 @@ PUT -  http://localhost:8080/rest-api/vagas/{id}
 }
 ```
 
+***
+***
+
 >#### listar 
 method -  uri
 
-GET - http://localhost:8080/rest-api/vaga
+GET - http://localhost:8080/rest-api/vagas
 
 >#### buscar por id 
 method -  uri
 
 GET - http://localhost:8080/rest-api/vagas/{id}
 
+>#### adicionar
+method -  uri
+
+POST -  http://localhost:8080/rest-api/vagas
+
 >#### deletar
 method -  uri
 
 DELETE - http://localhost:8080/rest-api/vagas/{id}
 
+>#### update
+method -  uri
 
+PUT - http://localhost:8080/rest-api/vagas/{id}
