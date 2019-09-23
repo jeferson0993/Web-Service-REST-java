@@ -1,13 +1,19 @@
 package br.com.restful.model;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public final class Vaga {
 
+	private String uf;
 	private Integer id;
 	private String nome;
-	private String uf;
+	private String turno;
+	private String outros;
+	private String remuneracao;
+	private boolean valeRefeicao;
+	private String especificacoes;
+	private boolean valeTransporte;
+	private String formaContratacao;
 
 	public Integer getId() {
 		return id;
@@ -33,13 +39,79 @@ public final class Vaga {
 		this.uf = uf;
 	}
 
+	public void setValeTransporte(boolean valeTransporte) {
+		this.valeTransporte = valeTransporte;
+	}
 
-	@Override
-	public String toString() {
-		return "Vaga [id=" + id + ", nome=" + nome + ", uf=" + uf  + "]";
+	public boolean getValeTransporte() {
+		return this.valeTransporte;
+	}
+
+	public boolean getValeRefeicao() {
+		return this.valeRefeicao;
+	}
+
+	public void setValeRefeicao(boolean valeRefeicao) {
+		this.valeRefeicao = valeRefeicao;
+	}
+
+	public String getEspecificacoes() {
+		return especificacoes;
+	}
+
+	public void setEspecificacoes(String especificacoes) {
+		this.especificacoes = especificacoes;
+	}
+
+	public String getRemuneracao() {
+		return remuneracao;
+	}
+
+	public void setRemuneracao(String remuneracao) {
+		this.remuneracao = remuneracao;
+	}
+
+	public String getOutros() {
+		return outros;
+	}
+
+	public void setOutros(String outros) {
+		this.outros = outros;
+	}
+
+	public String getTurno() {
+		return turno;
+	}
+
+	public void setTurno(String turno) {
+		this.turno = turno;
+	}
+
+	public String getFormaContratacao() {
+		return formaContratacao;
+	}
+
+	public void setFormaContratacao(String formaContratacao) {
+		this.formaContratacao = formaContratacao;
 	}
 
 	@Override
+	public String toString() {
+		return "Vaga{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", uf='" + uf + '\'' +
+				", valeTransporte=" + valeTransporte +
+				", valeRefeicao=" + valeRefeicao +
+				", especificacoes='" + especificacoes + '\'' +
+				", remuneracao='" + remuneracao + '\'' +
+				", outros='" + outros + '\'' +
+				", turno='" + turno + '\'' +
+				", formaContratacao='" + formaContratacao + '\'' +
+				'}';
+	}
+
+	/*@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -74,7 +146,7 @@ public final class Vaga {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
+	}*/
 	
 	
 }

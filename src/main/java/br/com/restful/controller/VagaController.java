@@ -1,5 +1,4 @@
 package br.com.restful.controller;
-
 import br.com.restful.dao.VagaDAO;
 import br.com.restful.model.Vaga;
 
@@ -10,7 +9,6 @@ public class VagaController {
 	public ArrayList<Vaga> listarTodos() {
 		System.out.println("VagaController: listarTodas ");
 		return VagaDAO.getInstance().listarTodos();
-
 	}
 
 	public Vaga buscarPorId(long id) {

@@ -14,7 +14,7 @@ public class vagaResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Vaga> listarTodos() {
-		System.out.println("vagas encontrados no banco");
+		System.out.println("vagas encontradas no banco");
 		return new VagaController().listarTodos();
 	}
 
@@ -22,7 +22,7 @@ public class vagaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
 	public Response getById(@PathParam("id") Long id) {
-            System.out.println("/vagas/" + id);
+		System.out.println("/vagas/" + id);
 		Vaga vaga = new VagaController().buscarPorId(id);
 		if (vaga != null) {
 			return Response.ok().type(MediaType.APPLICATION_JSON).entity(vaga).build();
@@ -41,7 +41,6 @@ public class vagaResource {
 		} else {
 			return Response.status(500).entity("Erro no servidor ao gravar a vaga").build();
 		}
-
 	}
 
 	@PUT
@@ -49,7 +48,6 @@ public class vagaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response altualizarvaga(Vaga vaga) {
 		boolean isvagaAtualizado = new VagaController().atualizarvaga(vaga);
-
 		if (isvagaAtualizado == true) {
 			return Response.ok().entity(vaga).build();
 		} else {
@@ -62,7 +60,6 @@ public class vagaResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response deletarvaga(Vaga vaga) {
-
 		boolean isvagaDeletado = new VagaController().deletarvaga(vaga);
 		if (isvagaDeletado == true) {
 			System.out.println("vaga " + vaga.getNome() + " deletada");
@@ -71,7 +68,6 @@ public class vagaResource {
 			System.out.println("Erro no servidor ao deletar a vaga: " + vaga.getNome());
 			return Response.status(500).entity("Erro no servidor ao deletar a vaga: " + vaga.getNome()).build();
 		}
-
 	}
 
 }

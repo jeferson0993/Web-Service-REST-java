@@ -1,5 +1,4 @@
 package br.com.restful.dao;
-
 import br.com.restful.factory.ConnectionFactory;
 import br.com.restful.model.Vaga;
 
@@ -21,22 +20,30 @@ public class VagaDAO extends ConnectionFactory {
 
 	public ArrayList<Vaga> listarTodos() {
 		Connection conexao = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		ArrayList<Vaga> vagas = null;
 
 		conexao = criarConexao();
 		vagas = new ArrayList<Vaga>();
 		
 		try {
-			pstmt = conexao.prepareStatement("SELECT * FROM vaga");
-			rs = pstmt.executeQuery();
+			preparedStatement = conexao.prepareStatement("SELECT * FROM vaga");
+			resultSet = preparedStatement.executeQuery();
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 				Vaga vaga = new Vaga();
 
-				vaga.setId(rs.getInt("id"));
-				vaga.setNome(rs.getString("nome"));
+				vaga.setId(resultSet.getInt("id"));
+				vaga.setNome(resultSet.getString("nome"));
+				vaga.setFormaContratacao(resultSet.getString("formaContratacao"));
+				vaga.setOutros(resultSet.getString("outros"));
+				vaga.setRemuneracao(resultSet.getString("remuneracao"));
+				vaga.setTurno(resultSet.getString("turno"));
+				vaga.setUf(resultSet.getString("uf"));
+				vaga.setValeRefeicao(Boolean.paresultSeteBoolean(resultSet.getString("valeRefeicao")));
+				vaga.setValeTransporte(Boolean.paresultSeteBoolean(resultSet.getString("valeTransporte")));
+				vaga.setEspecificacoes(resultSet.getString("especificacoes"));
 
 				vagas.add(vaga);
 				
@@ -46,7 +53,7 @@ public class VagaDAO extends ConnectionFactory {
 			System.out.println("Erro ao listar todas as vagas: " + e);
 			e.printStackTrace();
 		} finally {
-			fecharConexao(conexao, pstmt, rs);
+			fecharConexao(conexao, preparedStatement, resultSet);
 		}
 		
 		return vagas;
@@ -56,25 +63,33 @@ public class VagaDAO extends ConnectionFactory {
 	public Vaga getById(long id) {
 
 		Connection conexao = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		Vaga vaga = new Vaga();
 		conexao = criarConexao();
 
 		try {
-			pstmt = conexao.prepareStatement("SELECT * FROM vaga WHERE id = ?");
-			pstmt.setLong(1, id);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				vaga.setId(rs.getInt("id"));
-				vaga.setNome(rs.getString("nome"));
+			preparedStatement = conexao.prepareStatement("SELECT * FROM vaga WHERE id = ?");
+			preparedStatement.setLong(1, id);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				vaga.setId(resultSet.getInt("id"));
+				vaga.setNome(resultSet.getString("nome"));
+				vaga.setFormaContratacao(resultSet.getString("formaContratacao"));
+				vaga.setOutros(resultSet.getString("outros"));
+				vaga.setRemuneracao(resultSet.getString("remuneracao"));
+				vaga.setTurno(resultSet.getString("turno"));
+				vaga.setUf(resultSet.getString("uf"));
+				vaga.setValeRefeicao(Boolean.paresultSeteBoolean(resultSet.getString("valeRefeicao")));
+				vaga.setValeTransporte(Boolean.paresultSeteBoolean(resultSet.getString("valeTransporte")));
+				vaga.setEspecificacoes(resultSet.getString("especificacoes"));
 			}
                         System.out.println("VagaDao.getById: " + vaga.toString());
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar vaga com ID=" + id + "\n" + e);
 			e.printStackTrace();
 		} finally {
-			fecharConexao(conexao, pstmt, rs);
+			fecharConexao(conexao, preparedStatement, resultSet);
 		}
 
 		return vaga;
@@ -84,12 +99,12 @@ public class VagaDAO extends ConnectionFactory {
 	public boolean insert(Vaga vaga) {
 		String nome = vaga.getNome();
 		boolean isGravado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("insert into vaga(nome)" + "values(?)");
-			pstmt.setString(1, nome);
-			boolean execute = pstmt.execute();
+			preparedStatement = conexao.prepareStatement("insert into vaga(nome)" + "values(?)");
+			preparedStatement.setString(1, nome);
+			boolean execute = preparedStatement.execute();
 			isGravado = true;
 			System.out.println("Respota do insert: " + execute);
 
@@ -106,13 +121,13 @@ public class VagaDAO extends ConnectionFactory {
 		long id = vaga.getId();
 		String nome = vaga.getNome();
 		boolean isAtualizado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("UPDATE vaga SET nome =? WHERE id = ?");
-			pstmt.setString(1, nome);
-			pstmt.setLong(2, id);
-			int execute = pstmt.executeUpdate();
+			preparedStatement = conexao.prepareStatement("UPDATE vaga SET nome =? WHERE id = ?");
+			preparedStatement.setString(1, nome);
+			preparedStatement.setLong(2, id);
+			int execute = preparedStatement.executeUpdate();
 			isAtualizado = true;
 			System.out.println("Retorno update: " + execute);
 
@@ -121,7 +136,7 @@ public class VagaDAO extends ConnectionFactory {
 			e.printStackTrace();
 
 		} finally {
-			fecharConexao(conexao, pstmt, null);
+			fecharConexao(conexao, preparedStatement, null);
 		}
 		return isAtualizado;
 
@@ -129,12 +144,12 @@ public class VagaDAO extends ConnectionFactory {
 
 	public boolean delete(Vaga vaga) {
 		boolean isDeletado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("DELETE FROM vaga WHERE id = ?");
-			pstmt.setInt(1, vaga.getId());
-			boolean execute = pstmt.execute();
+			preparedStatement = conexao.prepareStatement("DELETE FROM vaga WHERE id = ?");
+			preparedStatement.setInt(1, vaga.getId());
+			boolean execute = preparedStatement.execute();
 			isDeletado = true;
 			System.out.println("Respota do delete: " + execute);
 
@@ -143,7 +158,7 @@ public class VagaDAO extends ConnectionFactory {
 			e.printStackTrace();
 
 		} finally {
-			fecharConexao(conexao, pstmt, null);
+			fecharConexao(conexao, preparedStatement, null);
 		}
 		return isDeletado;
 	}
