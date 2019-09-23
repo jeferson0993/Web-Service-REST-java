@@ -44,5 +44,6 @@
     <orderEntry type="library" name="Maven: javax.ws.rs:jsr311-api:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:cors-filter:2.5" level="project" />
     <orderEntry type="library" name="Maven: com.thetransactioncompany:java-property-utils:1.10" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations-java5:17.0.0" level="project" />
   </component>
 </module>
