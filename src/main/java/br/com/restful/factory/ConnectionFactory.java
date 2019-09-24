@@ -15,51 +15,40 @@ public class ConnectionFactory {
 	private String DRIVER;
 
 	public Connection criarConexao() {
-
 		HOST_MYSQL = "localhost";
 		PORTA_MYSQL = "3306";
 		USUARIO_MYSQL = "angularjs";
-		SENHA_MYSQL = "angularjs";
-		
+		SENHA_MYSQL = "angularjs";		
 		URL_MYSQL = "jdbc:mysql://" + HOST_MYSQL + ":" + PORTA_MYSQL + "/angularjs";
 		DRIVER = "com.mysql.jdbc.Driver";
+
 		Connection conexao = null;
 
 		try {
-
 			Class.forName(DRIVER);
 			conexao = DriverManager.getConnection(URL_MYSQL, USUARIO_MYSQL, SENHA_MYSQL);
 			System.out.println("Conexao criada");
-
-		} catch (Exception e) {
-                    
+		} catch (Exception e) {                    
 			System.out.println("Erro ao criar conexao com o banco: " + URL_MYSQL);
-			e.printStackTrace();
-                        
+			e.printStackTrace();                        
 		}
-		return conexao;
-                
+		return conexao;                
 	}
 
-	public void fecharConexao(Connection conexao, PreparedStatement pstmt, ResultSet rs) {
-
+	public void fecharConexao(Connection conexao, PreparedStatement preparedStatement, ResultSet resultSet) {
 		try {
-
 			if (conexao != null) {
 				conexao.close();
 			}
-			if (pstmt != null) {
-				pstmt.close();
+			if (preparedStatement != null) {
+				preparedStatement.close();
 			}
-			if (rs != null) {
-				rs.close();
+			if (resultSet != null) {
+				resultSet.close();
 			}
 			System.out.println("Conexao fechada");
-                        
 		} catch (Exception e) {
-                    
-			System.out.println("Erro ao fechar conexao com o banco: " + URL_MYSQL);
-                        
+			System.out.println("Erro ao fechar conexao com o banco: " + URL_MYSQL);                        
 		}
                 
 	}

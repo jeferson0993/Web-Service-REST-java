@@ -1,4 +1,5 @@
 package br.com.restful.dao;
+
 import br.com.restful.factory.ConnectionFactory;
 import br.com.restful.model.Vaga;
 
@@ -23,51 +24,43 @@ public class VagaDAO extends ConnectionFactory {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		ArrayList<Vaga> vagas = null;
-
 		conexao = criarConexao();
 		vagas = new ArrayList<Vaga>();
-		
 		try {
 			preparedStatement = conexao.prepareStatement("SELECT * FROM vaga");
 			resultSet = preparedStatement.executeQuery();
-
 			while (resultSet.next()) {
 				Vaga vaga = new Vaga();
 
 				vaga.setId(resultSet.getInt("id"));
 				vaga.setNome(resultSet.getString("nome"));
-				vaga.setFormaContratacao(resultSet.getString("formaContratacao"));
+				vaga.setFormaContratacao(resultSet.getString("formaDeContratacao"));
 				vaga.setOutros(resultSet.getString("outros"));
 				vaga.setRemuneracao(resultSet.getString("remuneracao"));
 				vaga.setTurno(resultSet.getString("turno"));
 				vaga.setUf(resultSet.getString("uf"));
-				vaga.setValeRefeicao(Boolean.paresultSeteBoolean(resultSet.getString("valeRefeicao")));
-				vaga.setValeTransporte(Boolean.paresultSeteBoolean(resultSet.getString("valeTransporte")));
-				vaga.setEspecificacoes(resultSet.getString("especificacoes"));
+				vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
+				vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
+				vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
 
 				vagas.add(vaga);
-				
+                                System.out.println("VagaDao.listarTodos: " + vaga.toString());
 			}
-
 		} catch (Exception e) {
 			System.out.println("Erro ao listar todas as vagas: " + e);
 			e.printStackTrace();
 		} finally {
 			fecharConexao(conexao, preparedStatement, resultSet);
 		}
-		
 		return vagas;
-		
 	}
 
 	public Vaga getById(long id) {
-
 		Connection conexao = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		Vaga vaga = new Vaga();
 		conexao = criarConexao();
-
 		try {
 			preparedStatement = conexao.prepareStatement("SELECT * FROM vaga WHERE id = ?");
 			preparedStatement.setLong(1, id);
@@ -75,27 +68,25 @@ public class VagaDAO extends ConnectionFactory {
 			while (resultSet.next()) {
 				vaga.setId(resultSet.getInt("id"));
 				vaga.setNome(resultSet.getString("nome"));
-				vaga.setFormaContratacao(resultSet.getString("formaContratacao"));
+				vaga.setFormaContratacao(resultSet.getString("formaDeContratacao"));
 				vaga.setOutros(resultSet.getString("outros"));
 				vaga.setRemuneracao(resultSet.getString("remuneracao"));
 				vaga.setTurno(resultSet.getString("turno"));
 				vaga.setUf(resultSet.getString("uf"));
-				vaga.setValeRefeicao(Boolean.paresultSeteBoolean(resultSet.getString("valeRefeicao")));
-				vaga.setValeTransporte(Boolean.paresultSeteBoolean(resultSet.getString("valeTransporte")));
-				vaga.setEspecificacoes(resultSet.getString("especificacoes"));
+				vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
+				vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
+				vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
 			}
-                        System.out.println("VagaDao.getById: " + vaga.toString());
+			System.out.println("VagaDao.getById: " + vaga.toString());
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar vaga com ID=" + id + "\n" + e);
 			e.printStackTrace();
 		} finally {
 			fecharConexao(conexao, preparedStatement, resultSet);
 		}
-
 		return vaga;
-
 	}
-	
+
 	public boolean insert(Vaga vaga) {
 		String nome = vaga.getNome();
 		boolean isGravado = false;
@@ -107,12 +98,9 @@ public class VagaDAO extends ConnectionFactory {
 			boolean execute = preparedStatement.execute();
 			isGravado = true;
 			System.out.println("Respota do insert: " + execute);
-
 		} catch (SQLException e) {
-
 			isGravado = false;
 			e.printStackTrace();
-
 		}
 		return isGravado;
 	}
@@ -139,7 +127,6 @@ public class VagaDAO extends ConnectionFactory {
 			fecharConexao(conexao, preparedStatement, null);
 		}
 		return isAtualizado;
-
 	}
 
 	public boolean delete(Vaga vaga) {
@@ -152,11 +139,9 @@ public class VagaDAO extends ConnectionFactory {
 			boolean execute = preparedStatement.execute();
 			isDeletado = true;
 			System.out.println("Respota do delete: " + execute);
-
 		} catch (SQLException e) {
 			isDeletado = false;
 			e.printStackTrace();
-
 		} finally {
 			fecharConexao(conexao, preparedStatement, null);
 		}

@@ -56,7 +56,6 @@ public class CandidatoResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response altualizarCandidato(Candidato candidato) {
 		boolean isCandidatoAtualizado = new CandidatoController().atualizarCandidato(candidato);
-
 		if (isCandidatoAtualizado == true) {
 			return Response.ok().entity(candidato).build();
 		} else {

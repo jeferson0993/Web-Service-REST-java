@@ -21,24 +21,24 @@ public class EmpresaDAO extends ConnectionFactory {
 
 	public ArrayList<Empresa> listarTodos() {
 		Connection conexao = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		ArrayList<Empresa> Empresas = null;
 
 		conexao = criarConexao();
 		Empresas = new ArrayList<Empresa>();
 		
 		try {
-			pstmt = conexao.prepareStatement("SELECT * FROM empresa ORDER BY nome");
-			rs = pstmt.executeQuery();
+			preparedStatement = conexao.prepareStatement("SELECT * FROM empresa ORDER BY nome");
+			resultSet = preparedStatement.executeQuery();
 
-			while (rs.next()) {
+			while (resultSet.next()) {
 				Empresa empresa = new Empresa();
 
-				empresa.setId(rs.getInt("id"));
-				empresa.setRazaoSocial(rs.getString("razaoSocial"));
-				empresa.setCnpj(rs.getString("cnpj"));
-				empresa.setEndereco(rs.getString("endereco"));
+				empresa.setId(resultSet.getInt("id"));
+				empresa.setRazaoSocial(resultSet.getString("razaoSocial"));
+				empresa.setCnpj(resultSet.getString("cnpj"));
+				empresa.setEndereco(resultSet.getString("endereco"));
 
 				Empresas.add(empresa);
 				
@@ -48,7 +48,7 @@ public class EmpresaDAO extends ConnectionFactory {
 			System.out.println("Erro ao listar todas as empresas: " + e);
 			e.printStackTrace();
 		} finally {
-			fecharConexao(conexao, pstmt, rs);
+			fecharConexao(conexao, preparedStatement, resultSet);
 		}
 		
 		return Empresas;
@@ -58,26 +58,26 @@ public class EmpresaDAO extends ConnectionFactory {
 	public Empresa getById(long id) {
 
 		Connection conexao = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
 		Empresa empresa = new Empresa();
 		conexao = criarConexao();
 
 		try {
-			pstmt = conexao.prepareStatement("SELECT * FROM empresa WHERE id = ?");
-			pstmt.setLong(1, id);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				empresa.setId(rs.getInt("id"));
-				empresa.setRazaoSocial(rs.getString("nome"));
-				empresa.setCnpj(rs.getString("cnpj"));
-				empresa.setEndereco(rs.getString("endereco"));				
+			preparedStatement = conexao.prepareStatement("SELECT * FROM empresa WHERE id = ?");
+			preparedStatement.setLong(1, id);
+			resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				empresa.setId(resultSet.getInt("id"));
+				empresa.setRazaoSocial(resultSet.getString("nome"));
+				empresa.setCnpj(resultSet.getString("cnpj"));
+				empresa.setEndereco(resultSet.getString("endereco"));				
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar Empresa com ID=" + id + "\n" + e);
 			e.printStackTrace();
 		} finally {
-			fecharConexao(conexao, pstmt, rs);
+			fecharConexao(conexao, preparedStatement, resultSet);
 		}
 
 		return empresa;
@@ -89,14 +89,14 @@ public class EmpresaDAO extends ConnectionFactory {
 		String cnpj = empresa.getCnpj();
 		String endereco = empresa.getEndereco();
 		boolean isGravado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("insert into empresa(nome,cpf,endereco)" + "values(?,?,?)");
-			pstmt.setString(1, razaoSocial);
-			pstmt.setString(2, cnpj);
-			pstmt.setString(3, endereco);
-			boolean execute = pstmt.execute();
+			preparedStatement = conexao.prepareStatement("insert into empresa(nome,cpf,endereco)" + "values(?,?,?)");
+			preparedStatement.setString(1, razaoSocial);
+			preparedStatement.setString(2, cnpj);
+			preparedStatement.setString(3, endereco);
+			boolean execute = preparedStatement.execute();
 			isGravado = true;
 			System.out.println("Respota do insert: " + execute);
 
@@ -115,15 +115,15 @@ public class EmpresaDAO extends ConnectionFactory {
 		String cnpj = empresa.getCnpj();
 		String endereco = empresa.getEndereco();
 		boolean isAtualizado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("UPDATE empresa SET nome =?,cpf = ?,endereco = ? WHERE id = ?");
-			pstmt.setString(1, razaoSocial);
-			pstmt.setString(2, cnpj);
-			pstmt.setString(3, endereco);
-			pstmt.setLong(4, id);
-			int execute = pstmt.executeUpdate();
+			preparedStatement = conexao.prepareStatement("UPDATE empresa SET nome =?,cpf = ?,endereco = ? WHERE id = ?");
+			preparedStatement.setString(1, razaoSocial);
+			preparedStatement.setString(2, cnpj);
+			preparedStatement.setString(3, endereco);
+			preparedStatement.setLong(4, id);
+			int execute = preparedStatement.executeUpdate();
 			isAtualizado = true;
 			System.out.println("Retorno update: " + execute);
 
@@ -132,7 +132,7 @@ public class EmpresaDAO extends ConnectionFactory {
 			e.printStackTrace();
 
 		} finally {
-			fecharConexao(conexao, pstmt, null);
+			fecharConexao(conexao, preparedStatement, null);
 		}
 		return isAtualizado;
 
@@ -140,12 +140,12 @@ public class EmpresaDAO extends ConnectionFactory {
 
 	public boolean delete(Empresa empresa) {
 		boolean isDeletado = false;
-		PreparedStatement pstmt = null;
+		PreparedStatement preparedStatement = null;
 		Connection conexao = criarConexao();
 		try {
-			pstmt = conexao.prepareStatement("DELETE FROM empresa WHERE id = ?");
-			pstmt.setInt(1, empresa.getId());
-			boolean execute = pstmt.execute();
+			preparedStatement = conexao.prepareStatement("DELETE FROM empresa WHERE id = ?");
+			preparedStatement.setInt(1, empresa.getId());
+			boolean execute = preparedStatement.execute();
 			isDeletado = true;
 			System.out.println("Respota do delete: " + execute);
 
@@ -154,7 +154,7 @@ public class EmpresaDAO extends ConnectionFactory {
 			e.printStackTrace();
 
 		} finally {
-			fecharConexao(conexao, pstmt, null);
+			fecharConexao(conexao, preparedStatement, null);
 		}
 		return isDeletado;
 	}
