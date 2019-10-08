@@ -18,8 +18,11 @@ CREATE TABLE IF NOT EXISTS `vaga` (
   `valeRefeicao` BOOLEAN NULL,
   `outros` VARCHAR(255) NULL,
   `uf` VARCHAR(2) NULL,
-  `Turno` VARCHAR(20) NULL,
-  `FormaDeContratacao` VARCHAR(45) NULL );
+  `turno` VARCHAR(20) NULL,
+  `formaDeContratacao` VARCHAR(45) NULL,
+  `empresa_id` INT NULL,
+  FOREIGN KEY (empresa_id) REFERENCES empresa(id));
+   
 
 insert into vaga ( nome, especificacaoDoCargo, remuneracao, valeTransporte, valeRefeicao, outros, uf, turno, formaDeContratacao
 ) values ( 'Frontend web developer jr', 'Desenvolvimento de aplicações web é mobile com integração de APIs restfull',
@@ -33,14 +36,21 @@ formaDeContratacao ) values ( 'Backend web developer Sr', 'Desenvolvimento de AP
 CREATE TABLE IF NOT EXISTS `empresa` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `cnpj` VARCHAR(45) NULL,
-  `RazaoSocial` VARCHAR(45) NULL,
-  `Endereco` VARCHAR(45) NULL );
+  `razaoSocial` VARCHAR(45) NULL,
+  `endereco` VARCHAR(45) NULL );
 
 CREATE TABLE IF NOT EXISTS `candidato` (
   `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `dataNascimento` VARCHAR(45) NULL,
   `cpf` VARCHAR(45) NULL,
-  `Rg` VARCHAR(45) NULL,
-  `EstadoCivil` VARCHAR(45) NULL,
-  `Sexo` VARCHAR(45) NULL,
-  `Endereco` VARCHAR(45) NULL );
+  `rg` VARCHAR(45) NULL,
+  `estadoCivil` VARCHAR(45) NULL,
+  `sexo` VARCHAR(45) NULL,
+  `endereco` VARCHAR(45) NULL );
+  
+  CREATE TABLE IF NOT EXISTS `experiencia` (
+  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `cargo` VARCHAR(45) NULL,
+  `funcao` VARCHAR(45) NULL,
+  `empresa_id` INT NULL,
+  FOREIGN KEY (empresa_id) REFERENCES empresa(id));
