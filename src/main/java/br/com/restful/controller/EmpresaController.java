@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class EmpresaController {
 
 	public ArrayList<Empresa> listarTodos() {
-		System.out.println("EmpresaController: listarTodos ");
+		System.out.println("EmpresaController.listarTodos()");
 		return EmpresaDAO.getInstance().listarTodos();
 	}
 
@@ -20,12 +20,12 @@ public class EmpresaController {
 	}
 
 	public boolean gravarEmpresa(Empresa empresa) {
-		System.out.println("EmpresaController: gravarEmpresa " + empresa.getRazaoSocial());
+		System.out.println("EmpresaController.gravarEmpresa(" + empresa.getRazaoSocial() +")");
 		return new EmpresaDAO().insert(empresa);
 	}
 
 	public boolean atualizarEmpresa(Empresa empresa) {
-		System.out.println("EmpresaController: atualizarEmpresa " + empresa.getRazaoSocial());
+		System.out.println("EmpresaController.atualizarEmpresa( " + empresa.getRazaoSocial() + ")");
 		return EmpresaDAO.getInstance().update(empresa);
 	}
 

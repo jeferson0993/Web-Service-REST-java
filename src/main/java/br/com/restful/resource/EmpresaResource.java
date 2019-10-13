@@ -1,7 +1,9 @@
 package br.com.restful.resource;
 
 import br.com.restful.controller.EmpresaController;
+import br.com.restful.controller.VagaController;
 import br.com.restful.model.Empresa;
+import br.com.restful.model.Vaga;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,7 +16,7 @@ public class EmpresaResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<Empresa> listarTodos() {
-		System.out.println("empresas encontrados no banco");
+		System.out.println("EmpresaResource.listarTodos()");
 		return new EmpresaController().listarTodos();
 	}
 
@@ -34,13 +36,13 @@ public class EmpresaResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response salvarempresaJson(Empresa empresa) {
+            System.out.println("EmpresaResource.salvarempresaJson()");
 		boolean isempresaGravado = new EmpresaController().gravarEmpresa(empresa);
 		if (isempresaGravado == true) {
 			return Response.ok().entity(empresa).build();
 		} else {
 			return Response.status(500).entity("Erro no servidor ao gravar a empresa").build();
 		}
-
 	}
 
 	@PUT
@@ -48,20 +50,24 @@ public class EmpresaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response altualizarempresa(Empresa empresa) {
 		boolean isempresaAtualizado = new EmpresaController().atualizarEmpresa(empresa);
-
+                System.out.println("is empresa atualizada => " + isempresaAtualizado);
 		if (isempresaAtualizado == true) {
 			return Response.ok().entity(empresa).build();
 		} else {
 			return Response.status(500).entity("Erro no servidor ao atualizar a empresa").build();
 		}
-
 	}
 
 	@DELETE
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletarempresa(Empresa empresa) {
-
+        @Path("/{id}")
+	public Response deletarempresa(@PathParam("id") Long id) {
+            Empresa empresa = new EmpresaController().buscarPorId(id);
+            ArrayList<Vaga> vagas = empresa.getVagas();
+            for (Vaga vaga : vagas) {
+                new VagaController().deletarvaga(vaga);
+            }        
 		boolean isempresaDeletado = new EmpresaController().deletarEmpresa(empresa);
 		if (isempresaDeletado == true) {
 			System.out.println("empresa " + empresa.getRazaoSocial() + " deletada");
@@ -70,7 +76,6 @@ public class EmpresaResource {
 			System.out.println("Erro no servidor ao deletar a empresa: " + empresa.getRazaoSocial());
 			return Response.status(500).entity("Erro no servidor  ao deletar empresa: " + empresa.getRazaoSocial()).build();
 		}
-
 	}
 
 }
