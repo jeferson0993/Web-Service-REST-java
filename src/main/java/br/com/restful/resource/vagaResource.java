@@ -56,10 +56,13 @@ public class vagaResource {
 
 	}
 
-	@DELETE
+	@DELETE        
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deletarvaga(Vaga vaga) {
+        @Path("/{id}")
+	public Response deletarvaga(@PathParam("id") Long id) {
+            Vaga vaga = new VagaController().buscarPorId(id);
+            System.out.println("deletarVaga: " + vaga.toString());
 		boolean isvagaDeletado = new VagaController().deletarvaga(vaga);
 		if (isvagaDeletado == true) {
 			System.out.println("vaga " + vaga.getNome() + " deletada");

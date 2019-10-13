@@ -1,5 +1,6 @@
 package br.com.restful.model;
 
+import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
@@ -13,8 +14,8 @@ public final class Candidato {
 	private String endereco;
 	private String telefone;
 	private String estadoCivil;
-	private String experiencia;
 	private String dataNascimento;
+	private ArrayList<Experiencia> experiencias;
 
 	public Integer getId() {
 		return id;
@@ -88,19 +89,19 @@ public final class Candidato {
 		this.estadoCivil = estadoCivil;
 	}
 
-	public String getExperiencia() {
-		return experiencia;
+	public ArrayList<Experiencia> getExperiencias() {
+		return experiencias;
 	}
 
-	public void setExperiencia(String experiencia) {
-		this.experiencia = experiencia;
+	public void setExperiencia(ArrayList<Experiencia> experiencias) {
+		this.experiencias = experiencias;
 	}
 
 	@Override
 	public String toString() {
 		return "Candidato{" + "id=" + id + ", rg='" + rg + '\'' + ", nome='" + nome + '\'' + ", cpf='" + cpf + '\''
 				+ ", sexo='" + sexo + '\'' + ", endereco='" + endereco + '\'' + ", telefone='" + telefone + '\''
-				+ ", estadoCivil='" + estadoCivil + '\'' + ", experiencia='" + experiencia + '\'' + ", dataNascimento='"
+				+ ", estadoCivil='" + estadoCivil + '\'' + ", experiencias='" + experiencias + '\'' + ", dataNascimento='"
 				+ dataNascimento + '\'' + '}';
 	}
 
