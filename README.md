@@ -2,14 +2,13 @@
 
 O projeto consiste em um web service desenvolvido com java e com persistencia de dados em MySql. Este web service recebe e envia dados em formato json. Foi desenvolvido para complementar o projeto da apresentação para a disciplina de *Novas Tecnologias em Desenvolvimento Web*, ministrada pelo professor **Marinaldo Oliveira Santos**, do curso **Tecnólogo em Sistemas para Internet**.
 
+[![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://jeferson.github.io/angularjs) 
+
 ***
 
 ## CRUD - REST 
 
-***
-
 ### methods -  uris
-***
 
 >#### listar 
 method -  uri
@@ -50,8 +49,7 @@ PUT - http://localhost:8080/rest-api/{empresas | vagas}/{id}
 
 ---
 
-### Licença
-Este projeto está licenciado sob a licença MIT - consulte o arquivo [LICENSE.md](LICENSE) para obter detalhes
+## Licença ? :scroll: [![GitHub license](https://img.shields.io/github/license/Naereen/badges.svg)](LICENSE).
 
 ---
 
