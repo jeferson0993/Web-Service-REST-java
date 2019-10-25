@@ -127,29 +127,21 @@ public class VagaDAO extends ConnectionFactory {
     
     public boolean insert(Vaga vaga) {
         String nome = vaga.getNome();
-        String remuneracao = vaga.getRemuneracao();
+        /*String remuneracao = vaga.getRemuneracao();
         boolean valeTransporte = vaga.getValeTransporte();
         boolean valeRefeicao = vaga.getValeRefeicao();
         String uf = vaga.getUf();
         String turno = vaga.getTurno();
         String formaDeContratacao = vaga.getFormaContratacao();
-        int empresa_id = vaga.getEmpresa_id();
+        int empresa_id = vaga.getEmpresa_id();*/
         boolean isGravado = false;
         PreparedStatement preparedStatement = null;
         Connection conexao = criarConexao();
         try {
-            preparedStatement = conexao.prepareStatement("insert into vaga(nome,remuneracao,valeTransporte,valeRefeicao,uf,turno,formaDeContratacao,empresa_id)" + "values(?,?,?,?,?,?,?,?)");
+            preparedStatement = conexao.prepareStatement("insert into vaga(nome)" + "values(?)");
             preparedStatement.setString(1, nome);
-            preparedStatement.setString(2, remuneracao);
-            preparedStatement.setBoolean(3, valeTransporte);
-            preparedStatement.setBoolean(4, valeRefeicao);
-            preparedStatement.setString(5, uf);
-            preparedStatement.setString(6, turno);
-            preparedStatement.setString(7, formaDeContratacao);
-            preparedStatement.setInt(8, empresa_id);
             boolean execute = preparedStatement.execute();
             isGravado = true;
-            /*System.out.println("Respota do insert: " + execute);*/
         } catch (SQLException e) {
             isGravado = false;
             e.printStackTrace();
@@ -164,9 +156,15 @@ public class VagaDAO extends ConnectionFactory {
         PreparedStatement preparedStatement = null;
         Connection conexao = criarConexao();
         try {
-            preparedStatement = conexao.prepareStatement("UPDATE vaga SET nome =? WHERE id = ?");
+            preparedStatement = conexao.prepareStatement("UPDATE vaga SET nome =?, turno=?, remuneracao=?, valeRefeicao=?, valeTransporte=?, formaDeContratacao=?, empresa_id=? WHERE id = ?");
             preparedStatement.setString(1, nome);
-            preparedStatement.setLong(2, id);
+            preparedStatement.setString(2, vaga.getTurno());
+            preparedStatement.setString(3, vaga.getRemuneracao());
+            preparedStatement.setBoolean(4, vaga.getValeRefeicao());
+            preparedStatement.setBoolean(5, vaga.getValeTransporte());
+            preparedStatement.setString(6, vaga.getFormaContratacao());
+            preparedStatement.setInt(7, vaga.getEmpresa_id());
+            preparedStatement.setLong(8, id);
             int execute = preparedStatement.executeUpdate();
             isAtualizado = true;
             System.out.println("Retorno update: " + execute);
