@@ -127,13 +127,6 @@ public class VagaDAO extends ConnectionFactory {
     
     public boolean insert(Vaga vaga) {
         String nome = vaga.getNome();
-        /*String remuneracao = vaga.getRemuneracao();
-        boolean valeTransporte = vaga.getValeTransporte();
-        boolean valeRefeicao = vaga.getValeRefeicao();
-        String uf = vaga.getUf();
-        String turno = vaga.getTurno();
-        String formaDeContratacao = vaga.getFormaContratacao();
-        int empresa_id = vaga.getEmpresa_id();*/
         boolean isGravado = false;
         PreparedStatement preparedStatement = null;
         Connection conexao = criarConexao();
@@ -167,8 +160,7 @@ public class VagaDAO extends ConnectionFactory {
             preparedStatement.setLong(8, id);
             int execute = preparedStatement.executeUpdate();
             isAtualizado = true;
-            System.out.println("Retorno update: " + execute);
-            
+            System.out.println("Retorno update: " + execute);            
         } catch (SQLException e) {
             isAtualizado = false;
             e.printStackTrace();
