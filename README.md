@@ -13,27 +13,27 @@ O projeto consiste em um web service desenvolvido com java e com persistencia de
 >#### listar 
 method -  uri
 
-GET - http://localhost:8080/rest-api/{empresas | vagas}
+GET - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}
 
 >#### buscar por id 
 method -  uri
 
-GET - http://localhost:8080/rest-api/{empresas | vagas}/{id}
+GET - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
 
 >#### adicionar
 method -  uri
 
-POST -  http://localhost:8080/rest-api/{empresas | vagas}
+POST -  http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}
 
 >#### deletar
 method -  uri
 
-DELETE - http://localhost:8080/rest-api/{empresas | vagas}/{id}
+DELETE - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
 
 >#### update
 method -  uri
 
-PUT - http://localhost:8080/rest-api/{empresas | vagas}/{id}
+PUT - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
 
 ---
 
