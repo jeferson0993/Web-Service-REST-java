@@ -1,5 +1,6 @@
 package br.com.restful.dao;
 
+import br.com.restful.controller.ExperienciaController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,21 +24,26 @@ public class CandidatoDAO extends ConnectionFactory {
 		Connection conexao = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-		ArrayList<Candidato> candidatos = null;
+		ArrayList<Candidato> Candidatos = null;
 
 		conexao = criarConexao();
-		candidatos = new ArrayList<Candidato>();
+		Candidatos = new ArrayList<Candidato>();
 
 		try {
-			preparedStatement = conexao.prepareStatement("SELECT * FROM candidato ORDER BY nome");
+			preparedStatement = conexao.prepareStatement("SELECT * FROM candidato");
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				Candidato candidato = new Candidato();
-				candidato.setId(resultSet.getInt("id"));
-				candidato.setNome(resultSet.getString("nome"));
-				candidato.setCpf(resultSet.getString("cpf"));
-				candidato.setDataNascimento(resultSet.getString("dataNascimento"));
-				candidatos.add(candidato);
+                            Candidato candidato = new Candidato();
+                            candidato.setId(resultSet.getInt("id"));
+                            candidato.setNome(resultSet.getString("nome"));
+                            candidato.setCpf(resultSet.getString("cpf"));
+                            candidato.setSexo(resultSet.getString("sexo"));
+                            candidato.setEndereco(resultSet.getString("endereco"));
+                            candidato.setEstadoCivil(resultSet.getString("estadoCivil"));
+                            candidato.setDataNascimento(resultSet.getString("dataNascimento"));
+                            /*EXPERIENCIAS:*/                                
+                            candidato.setExperiencias(new ExperienciaController().listarTodos( candidato.getId() ) );
+                            Candidatos.add(candidato);
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao listar todos os candidatos: " + e);
@@ -45,7 +51,8 @@ public class CandidatoDAO extends ConnectionFactory {
 		} finally {
 			fecharConexao(conexao, preparedStatement, resultSet);
 		}
-		return candidatos;
+                System.out.println("lista candidatos: " + Candidatos);
+		return Candidatos;
 	}
 
 	public Candidato getById(long id) {
@@ -59,11 +66,16 @@ public class CandidatoDAO extends ConnectionFactory {
 			preparedStatement.setLong(1, id);
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
-				candidato = new Candidato();
-				candidato.setId(resultSet.getInt("id"));
-				candidato.setNome(resultSet.getString("nome"));
-				candidato.setCpf(resultSet.getString("cpf"));
-				candidato.setDataNascimento(resultSet.getString("dataNascimento"));
+                            candidato = new Candidato();
+                            candidato.setId(resultSet.getInt("id"));
+                            candidato.setNome(resultSet.getString("nome"));
+                            candidato.setCpf(resultSet.getString("cpf"));
+                            candidato.setSexo(resultSet.getString("sexo"));
+                            candidato.setEndereco(resultSet.getString("endereco"));
+                            candidato.setEstadoCivil(resultSet.getString("estadoCivil"));
+                            candidato.setDataNascimento(resultSet.getString("dataNascimento"));
+                            /*EXPERIENCIAS:*/                                
+                            candidato.setExperiencias(new ExperienciaController().listarTodos(candidato.getId()));
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao buscar candidato com ID=" + id + "\n" + e);

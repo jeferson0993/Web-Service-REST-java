@@ -17,6 +17,7 @@ public class CandidatoController {
 		System.out.println("CandidatoController: buscarPorId - " + id);
 		CandidatoDAO dao = new CandidatoDAO();
 		Candidato candidato = dao.getById(id);
+                System.out.println("CandidatoController: candidato => " + candidato);
 		return candidato;
 	}
 

@@ -50,6 +50,7 @@ public class EmpresaDAO extends ConnectionFactory {
         } finally {
             fecharConexao(conexao, preparedStatement, resultSet);
         }
+        System.out.println("lista Empresas: " + Empresas);
         return Empresas;
 
     }

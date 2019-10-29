@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.restful.controller.CandidatoController;
+import br.com.restful.controller.ExperienciaController;
 import br.com.restful.model.Candidato;
+import br.com.restful.model.Experiencia;
 
 @Path("/candidatos")
 public class CandidatoResource {

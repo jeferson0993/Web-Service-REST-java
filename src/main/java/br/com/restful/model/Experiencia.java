@@ -4,7 +4,7 @@ package br.com.restful.model;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-class Experiencia {
+public final class Experiencia {
     private Integer id;
     private String cargo;
     private String funcao;

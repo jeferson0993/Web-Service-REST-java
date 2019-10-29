@@ -93,7 +93,7 @@ public final class Candidato {
 		return experiencias;
 	}
 
-	public void setExperiencia(ArrayList<Experiencia> experiencias) {
+	public void setExperiencias(ArrayList<Experiencia> experiencias) {
 		this.experiencias = experiencias;
 	}
 
