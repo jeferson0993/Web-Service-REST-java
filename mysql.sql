@@ -1,12 +1,16 @@
-/*
-*
-sudo apt-get install -y mariadb-server
-#comando em linha unica:#
-sudo mysql -e "CREATE USER 'angularjs'@'localhost' IDENTIFIED BY 'angularjs';
-GRANT ALL PRIVILEGES ON *.angularjs TO 'angularjs'@'localhost';
-FLUSH PRIVILEGES;select Host,User from mysql.user;"
-*
-*/
+/****
+    *
+    sudo apt-get install -y mariadb-server
+    sudo mysql;
+    CREATE DATABASE angularjs;
+    CREATE USER 'angularjs'@'localhost' IDENTIFIED BY 'angularjs';
+    GRANT ALL PRIVILEGES ON angularjs.* TO 'angularjs'@'localhost';
+    FLUSH PRIVILEGES;
+    SHOW GRANTS FOR 'angularjs'@'localhost';
+    sudo systemctl restart mysql;
+    mysql -u angularjs -D angularjs -p
+    *
+****/
 
 CREATE DATABASE angularjs;
 
@@ -16,7 +20,13 @@ CREATE TABLE IF NOT EXISTS `empresa` (
     `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `cnpj` VARCHAR(45) NULL,
     `razaoSocial` VARCHAR(45) NULL,
-    `endereco` VARCHAR(45) NULL
+    `endereco` VARCHAR(45) NULL,
+    `bairro` VARCHAR(45) NULL,
+    `uf` VARCHAR(45) NULL,
+    `cidade` VARCHAR(45) NULL,
+    `cep` VARCHAR(45) NULL,
+    `email` VARCHAR(45) NULL,
+    `telefone` VARCHAR(45) NULL,
 );
 
 CREATE TABLE IF NOT EXISTS `vaga` (
@@ -52,19 +62,21 @@ CREATE TABLE IF NOT EXISTS `experiencia` (
 );
 
 /*INSERTS
-insert into candidato values (1,'01/01/1991','123456','joão da silva', 'casado', 'masculino', 'endereco qualquer do joao');
-insert into candidato values (2,'03/03/1993','345678','maria pereira', 'casado', 'feminino', 'endereco qualquer da maria');
-insert into candidato values (3,'02/02/1994','234567','ana de alencar', 'solteiro', 'feminino', 'endereco qualquer do ana');
-insert into candidato values (4,'02/02/1992','456789','jose de sousa', 'casado', 'masculino', 'endereco qualquer do jose');
 
-insert into empresa values (1,'123456','software4you', 'endereco qualquer da software4you');
-insert into empresa values (2,'345678','casa do sistema', 'endereco qualquer da casa do sistema');
-insert into empresa values (3,'234567','tech soft', 'endereco qualquer tech soft');
-insert into empresa values (4,'456789','fabrica soft LDTA', 'endereco qualquer da fabrica soft LDTA');
+insert into empresa (id, cnpj, razaoSocial, endereco) values (1,'123456','software4you', 'Rua São Paulo, 886, Jardim da Conquista');
+insert into empresa (id, cnpj, razaoSocial, endereco) values (2,'345678','casa do sistema', 'Avenida Paulo Matarazzo, 726, Jardim Virgínia');
+insert into empresa (id, cnpj, razaoSocial, endereco) values (3,'234567','tech soft', 'Rua Davina da Silva Rosa Gurgel, 456, Jardim Campos do Conde II');
+insert into empresa (id, cnpj, razaoSocial, endereco) values (4,'456789','fabrica soft LDTA', 'Rua Galiléia, 803, Residencial Júlia Caparroz');
 
-insert into vaga (nome,remuneracao) values ('Analista de Sistemas Sr','6200');
-insert into vaga (nome,remuneracao) values ('Programador Full Stack','7800');
-insert into vaga (nome,remuneracao) values ('Analista de Sistemas Jr','2800');
+insert into vaga (nome, remuneracao, empresa_id) values ('Analista de Sistemas Sr','6200',1);
+insert into vaga (nome, remuneracao, empresa_id) values ('Programador Full Stack','7800',1);
+insert into vaga (nome, remuneracao, empresa_id) values ('Analista de Sistemas Jr','2800',2);
+
+
+insert into candidato values (1,'01/01/1991','123456','joão da silva', 'casado', 'masculino', 'Rua São Paulo, 886, Jardim da Conquista');
+insert into candidato values (2,'03/03/1993','345678','maria pereira', 'casado', 'feminino', 'Avenida Paulo Matarazzo, 726, Jardim Virgínia');
+insert into candidato values (3,'02/02/1994','234567','ana de alencar', 'solteiro', 'feminino', 'Rua Davina da Silva Rosa Gurgel, 456, Jardim Campos do Conde II');
+insert into candidato values (4,'02/02/1992','456789','jose de sousa', 'casado', 'masculino', 'Rua Galiléia, 803, Residencial Júlia Caparroz');
 
 insert into experiencia (cargo,funcao) values ('Programador Front End Jr','construcao de aplicacoes web');
 insert into experiencia (cargo,funcao) values ('Angular Web Developer','desenvolvimento de aplicacoes com angular');
