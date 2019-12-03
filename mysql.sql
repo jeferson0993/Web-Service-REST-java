@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `empresa` (
     `cidade` VARCHAR(45) NULL,
     `cep` VARCHAR(45) NULL,
     `email` VARCHAR(45) NULL,
-    `telefone` VARCHAR(45) NULL,
+    `telefone` VARCHAR(45) NULL
 );
 
 CREATE TABLE IF NOT EXISTS `vaga` (
@@ -78,7 +78,7 @@ insert into candidato values (2,'03/03/1993','345678','maria pereira', 'casado',
 insert into candidato values (3,'02/02/1994','234567','ana de alencar', 'solteiro', 'feminino', 'Rua Davina da Silva Rosa Gurgel, 456, Jardim Campos do Conde II');
 insert into candidato values (4,'02/02/1992','456789','jose de sousa', 'casado', 'masculino', 'Rua Galiléia, 803, Residencial Júlia Caparroz');
 
-insert into experiencia (cargo,funcao) values ('Programador Front End Jr','construcao de aplicacoes web');
-insert into experiencia (cargo,funcao) values ('Angular Web Developer','desenvolvimento de aplicacoes com angular');
-insert into experiencia (cargo,funcao) values ('Cientista de Dados','Analise de big data e geracao de relatorios');
+insert into experiencia (cargo,funcao,candidato_id) values ('Programador Front End Jr','construcao de aplicacoes web',1);
+insert into experiencia (cargo,funcao,candidato_id) values ('Angular Web Developer','desenvolvimento de aplicacoes com angular',1);
+insert into experiencia (cargo,funcao,candidato_id) values ('Cientista de Dados','Analise de big data e geracao de relatorios',2);
 */
