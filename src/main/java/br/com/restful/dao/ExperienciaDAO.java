@@ -116,7 +116,7 @@ public class ExperienciaDAO extends ConnectionFactory {
         try {
             preparedStatement = conexao.prepareStatement("insert into experiencia(cargo,candidato_id)" + "values(?,?)");
             preparedStatement.setString(1, cargo);
-             preparedStatement.setInt(2, candidato_id);
+            preparedStatement.setInt(2, candidato_id);
             boolean execute = preparedStatement.execute();
             isGravado = true;
         } catch (SQLException e) {
