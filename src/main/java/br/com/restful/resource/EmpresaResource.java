@@ -31,6 +31,38 @@ public class EmpresaResource {
 			return Response.status(404).entity("empresa nao encontrada").build();
 		}
 	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/razao-social/{empresa}")
+	public ArrayList<Empresa> getByNome(@PathParam("empresa") String empresa) {
+		System.out.println("empresa -> " + empresa);
+                return new EmpresaController().razaoSocial(empresa);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/razao-social/estado/{estado}")
+	public ArrayList<Empresa> getByEstado(@PathParam("estado") String estado) {
+		System.out.println("estado -> " + estado);
+                return new EmpresaController().buscarPorEstado(estado);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/razao-social/estado/cidade/{cidade}")
+	public ArrayList<Empresa> getByCidade(@PathParam("cidade") String cidade) {
+		System.out.println("estado -> " + cidade);
+                return new EmpresaController().buscarPorCidade(cidade);
+	}        
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/razao-social/estado/cidade/bairro/{bairro}")
+	public ArrayList<Empresa> getByBairro(@PathParam("bairro") String bairro) {
+		System.out.println("bairro -> " + bairro);
+                return new EmpresaController().buscarPorBairro(bairro);
+	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

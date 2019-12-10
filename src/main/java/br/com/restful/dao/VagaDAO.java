@@ -39,6 +39,7 @@ public class VagaDAO extends ConnectionFactory {
                 vaga.setRemuneracao(resultSet.getString("remuneracao"));
                 vaga.setTurno(resultSet.getString("turno"));
                 vaga.setUf(resultSet.getString("uf"));
+                vaga.setCidade(resultSet.getString("cidade"));
                 vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
                 vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
                 vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
@@ -76,6 +77,7 @@ public class VagaDAO extends ConnectionFactory {
                 vaga.setRemuneracao(resultSet.getString("remuneracao"));
                 vaga.setTurno(resultSet.getString("turno"));
                 vaga.setUf(resultSet.getString("uf"));
+                vaga.setCidade(resultSet.getString("cidade"));
                 vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
                 vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
                 vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
@@ -110,6 +112,7 @@ public class VagaDAO extends ConnectionFactory {
                 vaga.setRemuneracao(resultSet.getString("remuneracao"));
                 vaga.setTurno(resultSet.getString("turno"));
                 vaga.setUf(resultSet.getString("uf"));
+                vaga.setCidade(resultSet.getString("cidade"));
                 vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
                 vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
                 vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
@@ -149,15 +152,17 @@ public class VagaDAO extends ConnectionFactory {
         PreparedStatement preparedStatement = null;
         Connection conexao = criarConexao();
         try {
-            preparedStatement = conexao.prepareStatement("UPDATE vaga SET nome =?, turno=?, remuneracao=?, valeRefeicao=?, valeTransporte=?, formaDeContratacao=?, empresa_id=? WHERE id = ?");
+            preparedStatement = conexao.prepareStatement("UPDATE vaga SET nome =?, turno=?, remuneracao=?, valeRefeicao=?, valeTransporte=?, formaDeContratacao=?, empresa_id=?, uf=?, cidade=? WHERE id = ?");
             preparedStatement.setString(1, nome);
             preparedStatement.setString(2, vaga.getTurno());
             preparedStatement.setString(3, vaga.getRemuneracao());
             preparedStatement.setBoolean(4, vaga.getValeRefeicao());
             preparedStatement.setBoolean(5, vaga.getValeTransporte());
             preparedStatement.setString(6, vaga.getFormaContratacao());
-            preparedStatement.setInt(7, vaga.getEmpresa_id());
-            preparedStatement.setLong(8, id);
+            preparedStatement.setInt(7, vaga.getEmpresa_id());            
+            preparedStatement.setString(8, vaga.getUf());
+            preparedStatement.setString(9, vaga.getCidade());
+            preparedStatement.setLong(10, id);
             int execute = preparedStatement.executeUpdate();
             isAtualizado = true;
             System.out.println("Retorno update: " + execute);            
@@ -188,6 +193,45 @@ public class VagaDAO extends ConnectionFactory {
             fecharConexao(conexao, preparedStatement, null);
         }
         return isDeletado;
+    }
+
+    public ArrayList<Vaga> listBySomething(String campo, String valor) {
+        System.out.println("VagaDAO.getByCargo(cargo = " + valor + ")");
+        String sqlQuery = "SELECT * FROM vaga WHERE " + campo + " LIKE \"%" + valor +"%\"";
+        Connection conexao = criarConexao();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        ArrayList<Vaga> vagas = new ArrayList<Vaga>();
+        System.out.println("Query -> " + sqlQuery);
+        try {
+            preparedStatement = conexao.prepareStatement(sqlQuery);
+            resultSet = preparedStatement.executeQuery();
+            
+            System.out.println(resultSet);
+            while (resultSet.next()) {
+                Vaga vaga = new Vaga();
+                
+                vaga.setId(resultSet.getInt("id"));
+                vaga.setNome(resultSet.getString("nome"));
+                vaga.setFormaContratacao(resultSet.getString("formaDeContratacao"));
+                vaga.setRemuneracao(resultSet.getString("remuneracao"));
+                vaga.setTurno(resultSet.getString("turno"));
+                vaga.setUf(resultSet.getString("uf"));
+                vaga.setCidade(resultSet.getString("cidade"));
+                vaga.setValeRefeicao(resultSet.getBoolean("valeRefeicao"));
+                vaga.setValeTransporte(resultSet.getBoolean("valeTransporte"));
+                vaga.setEspecificacoes(resultSet.getString("especificacaoDoCargo"));
+                vaga.setEmpresa_id(resultSet.getInt("empresa_id"));
+                
+                vagas.add(vaga);
+                System.out.println("VagaDao.listarTodasVagasPorCargo: " + vaga.toString());
+            }
+        } catch (Exception e) {
+            System.out.println("Exception: " + e.getMessage());
+        } finally {
+            fecharConexao(conexao, preparedStatement, resultSet);
+        }
+        return vagas;
     }
     
 }

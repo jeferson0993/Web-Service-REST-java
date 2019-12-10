@@ -39,4 +39,24 @@ public class VagaController {
         return VagaDAO.getInstance().delete(vaga);
     }
 
+    public ArrayList<Vaga> buscarPorEmpresa(String empresa) {
+        //usar a consulta de empresa por nome para pegar o id
+        System.out.println("VagaController: buscarPorEmpresa - " + empresa);
+        return null;// VagaDAO.getInstance().listBySomething("empresa_id", empresa_id);
+    }
+
+    public ArrayList<Vaga> buscarPorCargo(String cargo) {
+        System.out.println("VagaController: buscarPorCargo - " + cargo);
+        return VagaDAO.getInstance().listBySomething("nome", cargo);
+    }
+
+    public ArrayList<Vaga> buscarPorCidade(String cidade) {
+        System.out.println("VagaController: buscarPorCidade - " + cidade);
+        return VagaDAO.getInstance().listBySomething("cidade", cidade);
+    }
+
+    public ArrayList<Vaga> buscarPorEstado(String estado) {
+        System.out.println("VagaController: buscarPorEstado - " + estado);
+        return VagaDAO.getInstance().listBySomething("uf", estado);
+    }    
 }

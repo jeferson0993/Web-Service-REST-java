@@ -31,6 +31,38 @@ public class vagaResource {
 		}
 	}
 
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/cargo/{cargo}")
+	public ArrayList<Vaga> getByCargo(@PathParam("cargo") String cargo) {
+		System.out.println("cargo -> " + cargo);
+                return new VagaController().buscarPorCargo(cargo);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/cargo/empresa/{empresa}")
+	public ArrayList<Vaga> getByEmpresa(@PathParam("empresa") String empresa) {
+		System.out.println("empresa -> " + empresa);
+                return new VagaController().buscarPorEmpresa(empresa);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/cargo/empresa/estado/{estado}")
+	public ArrayList<Vaga> getByEstado(@PathParam("estado") String estado) {
+		System.out.println("estado -> " + estado);
+                return new VagaController().buscarPorEstado(estado);
+	}        
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/cargo/empresa/estado/cidade/{cidade}")
+	public ArrayList<Vaga> getByCidade(@PathParam("cidade") String cidade) {
+		System.out.println("cidade -> " + cidade);
+                return new VagaController().buscarPorCidade(cidade);
+	}
+                      
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

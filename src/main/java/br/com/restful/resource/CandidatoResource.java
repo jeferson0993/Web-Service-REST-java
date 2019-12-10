@@ -14,9 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import br.com.restful.controller.CandidatoController;
-import br.com.restful.controller.ExperienciaController;
 import br.com.restful.model.Candidato;
-import br.com.restful.model.Experiencia;
 
 @Path("/candidatos")
 public class CandidatoResource {
@@ -38,6 +36,30 @@ public class CandidatoResource {
 		} else {
 			return Response.status(404).entity("Candidato nao encontrado").build();
 		}
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/nome/{nome}")
+	public ArrayList<Candidato> getByNome(@PathParam("nome") String nome) {
+		System.out.println("nome -> " + nome);
+                return new CandidatoController().buscarPorNome(nome);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/nome/sexo/{sexo}")
+	public ArrayList<Candidato> getBySexo(@PathParam("sexo") String sexo) {
+		System.out.println("sexo -> " + sexo);
+                return new CandidatoController().buscarPorSexo(sexo);
+	}
+        
+        @GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/nome/sexo/estado-civil/{estado-civil}")
+	public ArrayList<Candidato> getByCidade(@PathParam("estado-civil") String estado_civil) {
+		System.out.println("estado civil -> " + estado_civil);
+                return new CandidatoController().buscarPorEstadoCivil(estado_civil);
 	}
 
 	@POST

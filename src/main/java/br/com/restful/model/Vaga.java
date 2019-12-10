@@ -8,6 +8,7 @@ public final class Vaga {
     private String uf;
     private Integer id;
     private String nome;
+    private String cidade;
     private String turno;
     private String remuneracao;
     private boolean valeRefeicao;
@@ -38,7 +39,7 @@ public final class Vaga {
 
     public void setUf(String uf) {
         this.uf = uf;
-    }
+    }        
 
     public void setValeTransporte(boolean valeTransporte) {
         this.valeTransporte = valeTransporte;
@@ -96,9 +97,17 @@ public final class Vaga {
         this.empresa_id = empresa_id;
     }
 
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
     @Override
     public String toString() {
         return "Vaga{" + "uf=" + uf + ", id=" + id + ", nome=" + nome + ", turno=" + turno + ", remuneracao=" + remuneracao + ", valeRefeicao=" + valeRefeicao + ", especificacoes=" + especificacoes + ", valeTransporte=" + valeTransporte + ", formaContratacao=" + formaContratacao + ", empresa_id=" + empresa_id + '}';
     }
-
 }

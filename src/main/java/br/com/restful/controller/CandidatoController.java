@@ -7,33 +7,39 @@ import br.com.restful.model.Candidato;
 
 public class CandidatoController {
 
-	public ArrayList<Candidato> listarTodos() {
-		System.out.println("CandidatoController: listarTodos ");
-		return CandidatoDAO.getInstance().listarTodos();
+    public ArrayList<Candidato> listarTodos() {
+        return CandidatoDAO.getInstance().listarTodos();
 
-	}
+    }
 
-	public Candidato buscarPorId(long id) {
-		System.out.println("CandidatoController: buscarPorId - " + id);
-		CandidatoDAO dao = new CandidatoDAO();
-		Candidato candidato = dao.getById(id);
-                System.out.println("CandidatoController: candidato => " + candidato);
-		return candidato;
-	}
+    public Candidato buscarPorId(long id) {
+        CandidatoDAO dao = new CandidatoDAO();
+        Candidato candidato = dao.getById(id);
+        return candidato;
+    }
 
-	public boolean gravarCandidato(Candidato candidato) {
-		System.out.println("CandidatoController: gravarCandidato " + candidato.getNome());
-		return new CandidatoDAO().insert(candidato);
-	}
+    public boolean gravarCandidato(Candidato candidato) {
+        return new CandidatoDAO().insert(candidato);
+    }
 
-	public boolean atualizarCandidato(Candidato candidato) {
-		System.out.println("CandidatoController: atualizarCandidato " + candidato.getNome());
-		return CandidatoDAO.getInstance().update(candidato);
-	}
+    public boolean atualizarCandidato(Candidato candidato) {
+        return CandidatoDAO.getInstance().update(candidato);
+    }
 
-	public boolean deletarCandidato(Candidato candidato) {
-		System.out.println("CandidatoController: deletarCandidato " + candidato.getNome());
-		return CandidatoDAO.getInstance().delete(candidato);
-	}
+    public boolean deletarCandidato(Candidato candidato) {
+        return CandidatoDAO.getInstance().delete(candidato);
+    }
+
+    public ArrayList<Candidato> buscarPorNome(String nome) {
+        return CandidatoDAO.getInstance().listBySomething("nome", nome);
+    }
+
+    public ArrayList<Candidato> buscarPorSexo(String sexo) {
+        return CandidatoDAO.getInstance().listBySomething("sexo", sexo);
+    }
+
+    public ArrayList<Candidato> buscarPorEstadoCivil(String estado_civil) {
+        return CandidatoDAO.getInstance().listBySomething("estadoCivil", estado_civil);
+    }
 
 }
