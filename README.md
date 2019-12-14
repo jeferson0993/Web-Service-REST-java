@@ -1,6 +1,6 @@
 # Web Service REST em java
 
-O projeto consiste em um web service desenvolvido com java e com persistencia de dados em MySql. Este web service recebe e envia dados em formato json. Foi desenvolvido para complementar o projeto da apresentação para a disciplina de *Novas Tecnologias em Desenvolvimento Web*, ministrada pelo professor **Marinaldo Oliveira Santos**, do curso **Tecnólogo em Sistemas para Internet**.
+O projeto consiste em um web service desenvolvido com java e com persistencia de dados em jpa. Este web service recebe e envia dados em formato json. Foi desenvolvido para complementar o projeto da apresentação para a disciplina de *Novas Tecnologias em Desenvolvimento Web*, ministrada pelo professor **Marinaldo Oliveira Santos**, do curso **Tecnólogo em Sistemas para Internet** do **IFTO - Campus Palmas**.
 
 [![Website shields.io](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](http://jeferson.github.io/angularjs) 
 
@@ -13,27 +13,27 @@ O projeto consiste em um web service desenvolvido com java e com persistencia de
 >#### listar 
 method -  uri
 
-GET - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}
+GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}
 
 >#### buscar por id 
 method -  uri
 
-GET - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
+GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
 
 >#### adicionar
 method -  uri
 
-POST -  http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}
+POST -  https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}
 
 >#### deletar
 method -  uri
 
-DELETE - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
+DELETE - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
 
 >#### update
 method -  uri
 
-PUT - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{id}
+PUT - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
 
 ---
 
@@ -55,11 +55,10 @@ PUT - http://localhost:8080/rest-api/{empresas|vagas|candidatos|experiencias}/{i
 
 #### Tecnologias utilizadas:
 * Java
-* Jersey
+* JPA
 * JSON
 * XML
 * Maven
-* MySql
-* SQL
-* GlassFish
+* PostgreSQL
+* Heroku
 * GIT
