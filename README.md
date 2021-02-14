@@ -43,8 +43,8 @@ PUT - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candi
 
 * [Github](https://github.com/jeferson0993)
 * [Codepen](https://codepen.io/jeferson0993)
-* [Linkedin](https://www.linkedin.com/in/jeferson-ferreira-4a036b143)
-* [Portifolio](http://www.jeferson.ml)
+* [Linkedin](https://www.linkedin.com/in/jeferson0993)
+* [Portifolio](http://www.jeferson.gq)
 * jeferson0993@gmail.com
 
 ---
