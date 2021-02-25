@@ -11,31 +11,38 @@ O projeto consiste em um web service desenvolvido com java e com persistencia de
 ### methods -  uris
 
 >#### listar 
+
+![Screenshot_2021-02-25 JAVA REST API HEROKU](https://user-images.githubusercontent.com/29678099/109166688-bd80db80-775b-11eb-9932-7613d7082f71.png)
+
 method -  uri
 
-GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}
+GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/ { empresas|vagas|candidatos|experiencias }
+
+![Screenshot_2021-02-25 JAVA REST API HEROKU(1)](https://user-images.githubusercontent.com/29678099/109166692-beb20880-775b-11eb-8898-e2d9f3ab8049.png)
 
 >#### buscar por id 
 method -  uri
 
-GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
+GET - https://fierce-escarpment-08191.herokuapp.com/api/v1/ { empresas|vagas|candidatos|experiencias } / { id }
 
 >#### adicionar
 method -  uri
 
-POST -  https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}
+POST -  https://fierce-escarpment-08191.herokuapp.com/api/v1/ { empresas|vagas|candidatos|experiencias }
 
 >#### deletar
 method -  uri
 
-DELETE - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
+DELETE - https://fierce-escarpment-08191.herokuapp.com/api/v1/ { empresas|vagas|candidatos|experiencias } / { id }
 
 >#### update
 method -  uri
 
-PUT - https://fierce-escarpment-08191.herokuapp.com/api/v1/{empresas|vagas|candidatos|experiencias}/{id}
+PUT - https://fierce-escarpment-08191.herokuapp.com/api/v1/ { empresas|vagas|candidatos|experiencias } / { id }
 
 ---
+
+### [Documentação](https://documenter.getpostman.com/view/8429457/TWDcDu1H)
 
 ### Autor
 
